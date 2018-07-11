@@ -1,11 +1,24 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+import 'babel-polyfill';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { HashRouter, Route } from 'react-router-dom';
+import { Login, Register, UserValidation } from './Login';
 
-/* This can check if your electron app can communicate with your backend */
-// fetch('http://localhost:3000')
-// .then(resp => resp.text())
-// .then(text => console.log(text))
-// .catch(err => {throw err})
 
-ReactDOM.render(<p>React lives!</p>,
-   document.getElementById('root'));
+class Home extends React.Component {
+  render() {
+    return (
+      <HashRouter>
+        <div>
+          <Route exact path="/" component={UserValidation} />
+          <Route path="/login" component={Login}/>
+          <Route path="/register" component={Register}/>
+        </div>
+      </HashRouter>
+    );
+  }
+}
+ReactDOM.render(
+  <Home />,
+  document.getElementById('root')
+);
